@@ -1,0 +1,38 @@
+.card-doctor__favorite-wrapper {
+    height: 30px;
+    width: 30px;
+}
+
+.card-clinic__container {
+    margin: 40px 0;
+}
+
+.card-clinic__avatar {
+    flex-basis: 180px;
+}
+
+.card-clinic__contacts-row {
+    display: flex;
+    align-items: center;
+}
+
+.card-clinic__icon-contact {
+    margin-right: 12px;
+}
+
+.card-clinic__contacts-row + .card-clinic__contacts-row {
+    margin-top: 12px;
+}
+
+.card-clinic__contact-text {
+    color: #0070c0;
+    font-size: 16px;
+    line-height: 125%;
+    letter-spacing: 0;
+    font-weight: 400;
+}
+
+.card-clinic__description-block {
+    margin-left: auto;
+    flex-basis: 240px;
+}

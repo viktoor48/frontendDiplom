@@ -1,0 +1,549 @@
+/*детальная страница доктора*/
+
+.doctor-intro__wrapper {
+    padding: 10px;
+}
+
+.doctor-intro {
+    display: flex;
+    padding: 28px 25px;
+    background-color: #FFFFFF;
+}
+
+.doctor-intro__left-side {
+    flex-basis: 280px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+    .doctor-intro__left-side {
+        flex-basis: 220px;
+    }
+}
+
+.doctor-intro__link-review {
+    display: flex;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    text-decoration-line: underline;
+    color: #4E4E4E;
+    transition: 0.3s ease;
+}
+
+.doctor-intro__right-side {
+    flex: 1 1 auto;
+    margin-left: 32px;
+}
+
+.doctor-intro__name {
+    margin-bottom: 8px;
+}
+
+.doctor-intro__name-link {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: #111111;
+}
+
+.doctor-intro__city {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #4E4E4E;
+    margin-bottom: 8px;
+}
+
+.doctor-intro__spec {
+    margin-bottom: 16px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #4E4E4E;
+    display: flex;
+}
+
+.doctor-intro__spec-link:not(:last-child):after {
+    content: ",";
+}
+
+.doctor-intro__spec-link:not(:last-child) {
+    margin-right: 8px;
+}
+
+.doctor-intro__description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #4E4E4E;
+    margin-bottom: 24px;
+}
+
+.doctor-intro__img-wrapper {
+    width: 100%;
+}
+
+.doctor-intro__img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.doctor-intro .card-doctor__stars-container {
+    margin-bottom: 8px;
+}
+
+.rating-result {
+    display: flex;
+    justify-content: center;
+}
+
+.rating-result span {
+    padding: 0;
+    font-size: 20px;
+    margin: 0 2px;
+    line-height: 1;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+}
+
+.rating-result > span:before {
+    content: '★';
+}
+
+.rating-result > span.active {
+    color: gold;
+    text-shadow: 1px 1px #c60;
+}
+/*детальная страница доктора*/
+
+.doctor-contacts {
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.doctor-contacts__title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #181d21;
+}
+
+.doctor-contacts__body {
+    margin-top: 24px;
+}
+
+.doctor-contacts__map-preview {
+    height: 100px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    position: relative;
+    background: url("../images/map-background.png") no-repeat 50%/cover;
+    overflow: hidden;
+}
+
+.doctor-contacts__map {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(48, 69, 83, 0.4) 0%, rgba(48, 69, 83, 0.54) 100%);
+}
+
+.doctor-contacts__map:hover {
+    opacity: 0.6;
+}
+
+.doctor-contacts__map-text {
+    z-index: 1;
+    padding-bottom: 1px;
+    border-bottom: 2px dashed;
+    -webkit-transition: border-bottom-color .2s ease-in-out;
+    -o-transition: .2s ease-in-out border-bottom-color;
+    transition: border-bottom-color .2s ease-in-out;
+    color: #FFFFFF;
+}
+
+.doctor-contacts__map:hover .doctor-contacts__map-text {
+    border-bottom: 2px dashed transparent;
+}
+
+.doctor-contacts__info {
+    padding: 24px 15px;
+    background-color: #FFFFFF;
+}
+
+.doctor-contacts__info-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.doctor-contacts__info-right {
+    flex-grow: 1;
+    margin-left: 34px;
+}
+
+.doctor-contacts__clinic-name {
+    margin-bottom: 15px;
+}
+
+.doctor-contacts__clinic-link {
+    padding: 0;
+    font-weight: 500;
+    font-size: 16px;
+    color: #0070c0;
+}
+
+.doctor-contacts__address {
+    margin-bottom: 23px;
+    color: #111;
+}
+
+.doctor-contacts__prices-item {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #111111;
+}
+
+.doctor-contacts__prices-item + .doctor-contacts__prices-item {
+    margin-top: 7px;
+}
+
+.doctor-contacts__prices {
+    margin-bottom: 24px;
+    margin-bottom: 24px;
+}
+
+.rating {
+    padding: 16px 10px;
+}
+
+.rating-wrapper {
+    background-color: #FFFFFF;
+    padding: 24px;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.rating__title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    color: #181D21;
+    margin-bottom: 9px;
+}
+
+.rating__number {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    color: #111111;
+}
+
+.rating__number-row {
+    display: flex;
+    align-items: center;
+}
+
+.rating__number-row .rating__number {
+    margin-right: 8px;
+}
+
+.rating__number-row .card-doctor__stars-container {
+    margin-bottom: 3px;
+}
+
+.rating__stat-wrapper {
+    padding: 24px;
+    background-color: #FFFFFF;
+}
+
+.rating__stat-wrapper .rating__stat-title {
+    margin-bottom: 7px;
+}
+
+.rating__stat-wrapper .rating__stat-number {
+    margin-right: 6px;
+}
+
+.rating__stat-number {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #111111;
+}
+
+.rating__stat-wrapper .rating-result span {
+    font-size: 15px;
+}
+
+.rating__stat-wrapper:hover,
+.rating__stat-wrapper:focus {
+    opacity: 0.6;
+}
+
+.rating__stat-expansion {
+    background-color: #FFFFFF;
+}
+
+.rating__stat-row {
+    margin-bottom: 20px;
+}
+
+.rating__stat-info-block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.rating__stat-info-left {
+    color: #4e4e4e;
+    font-size: 14px;
+    line-height: 140%;
+}
+
+.rating__stat-info-right {
+    color: #111;
+    font-size: 14px;
+    line-height: 140%;
+}
+
+.rating__stat-bar {
+    height: 4px;
+    border-radius: 4px;
+    background-color: #dcdcdc;
+    overflow: hidden;
+}
+
+.rating__stat-progress {
+    height: 100%;
+    background-color: #0070c0;
+    width: 99.0%;/*установка прогресс бара*/
+}
+
+.review-doctor {
+    padding: 16px 10px;
+}
+
+.review-doctor__wrapper {
+    padding: 24px;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.review-doctor__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.review-doctor__header:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    margin-top: 60px;
+    margin-left: -24px;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.review-doctor__review-btn {
+    width: 214px;
+    margin-left: 20px;
+}
+
+.review-doctor__container {
+
+}
+
+.review-doctor__card {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.review-doctor__card:not(:first-child) {
+    margin-top: 20px;
+}
+
+.review-doctor__card:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #DCDCDC;
+    bottom: 0;
+}
+
+.review-doctor__card-aside {
+    margin-right: 24px;
+}
+
+.review-doctor__author-name {
+    color: #0070c0;
+    margin-bottom: 5px;
+}
+
+.review-doctor__author-phone {
+    color: #0070c0;
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+.review-doctor__date-published {
+    color: #4e4e4e;
+    font-size: 14px;
+    line-height: 140%;
+    margin-bottom: 20px;
+}
+
+.review-doctor__rate-wrapper {
+    position: relative;
+}
+
+.review-doctor__rate {
+    cursor: help;
+    display: flex;
+}
+
+.review-doctor__rate-num {
+    background: #30b786;
+    color: #fff;
+    padding: 8px;
+    border-radius: 5px 0px 0 5px;
+}
+
+.review-doctor__rate-name {
+    background: #e0f6ee;
+    color: #30b786;
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.review-doctor__detail-rate {
+    padding: 16px;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: calc(100% + 18px);
+    left: 0;
+    background: #fff;
+    border: 1px solid #c7d3d9;
+    -webkit-box-shadow: 3px 4px 9px rgba(0,0,0,.12);
+    box-shadow: 3px 4px 9px rgba(0,0,0,.12);
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.review-doctor__rate:hover .review-doctor__detail-rate {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-animation: fadeIn .2s ease-in-out;
+    animation: fadeIn .2s ease-in-out;
+}
+
+.review-doctor__detail-rate:before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 7px;
+    left: 20px;
+    top: calc(100% - 1px);
+    background: url("../images/down-arrow.svg") no-repeat;
+    z-index: 20;
+}
+
+.review-doctor__detail-row {
+    display: flex;
+    white-space: nowrap;
+    justify-content: space-between;
+    padding: 8px 0 8px;
+    color: #181d21;
+    font-size: 14px;
+    line-height: 140%;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.review-doctor__detail-row:not(:last-child) {
+    border-bottom: 1px solid #e8ebf1;
+}
+
+.review-doctor__detail-rate-value {
+    color: #30b786;
+    margin-left: 10px;
+}
+
+.review-doctor__card-logo {
+    width: 78px;
+    height: 15px;
+    position: absolute;
+    opacity: .5;
+    top: 0;
+    right: 0;
+    background: 50%/contain no-repeat url("../images/logo.svg");
+}
+
+.review-doctor__card-comment-title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #111111;
+    margin-bottom: 2px;
+}
+
+.review-doctor__card-comment {
+    font-size: 14px;
+    line-height: 20px;
+    color: #111111;
+}
+
+.review-doctor__card-comment-wrapper + .review-doctor__card-comment-wrapper {
+    margin-top: 16px;
+}
+
+.review-doctor__card-footer {
+    padding-top: 24px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #4E4E4E;
+}
+
+.review-doctor__footer-date {
+    display: flex;
+    margin-right: 20px;
+}
+
+.review-doctor__footer-icon {
+    width: 20px;
+    height: 20px;
+    background: url("../images/record.svg") no-repeat;
+    background-size: cover;
+    margin-right: 15px;
+}
+
+.review-doctor__date {
+    white-space: break-spaces;
+    max-width: 120px;
+}
+
+.review-doctor__footer-address {
+    max-width: 410px;
+    margin-left: auto;
+    text-align: right;
+}
+

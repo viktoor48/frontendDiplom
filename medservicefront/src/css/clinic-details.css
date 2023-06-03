@@ -1,0 +1,54 @@
+.clinic-intro__wrapper {
+    padding: 10px;
+}
+
+.clinic-intro__name {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: #111111;
+}
+
+.clinic-intro__description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #4E4E4E;
+    margin: 24px 0;
+}
+
+.card-clinic__contacts-row {
+    display: flex;
+    align-items: center;
+}
+
+.card-clinic__icon-contact {
+    margin-right: 12px;
+}
+
+.card-clinic__contacts-row + .card-clinic__contacts-row {
+    margin-top: 12px;
+}
+
+.card-clinic__contact-text {
+    color: #0070c0;
+    font-size: 16px;
+    line-height: 125%;
+    letter-spacing: 0;
+    font-weight: 400;
+}
+
+.clinic__title-row {
+    display: flex;
+    padding: 10px;
+}
+
+.clinic__doctors-count {
+    color: #4e4e4e;
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+.clinic-intro__doctor-list .card-doctor__container {
+    margin-top: 0;
+}

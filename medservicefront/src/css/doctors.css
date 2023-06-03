@@ -1,0 +1,270 @@
+.card-doctor__container {
+    margin: 40px 0;
+}
+
+.card-doctor {
+    padding: 10px;
+}
+
+.card-doctor__row {
+    background-color: #FFFFFF;
+    display: flex;
+    padding: 18px;
+}
+
+.card-doctor__avatar {
+    flex-basis: 150px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.card-doctor__img-wrapper {
+    position: relative;
+}
+
+.card-doctor__img-wrapper img {
+    display: block;
+    margin: 0 auto;
+}
+
+.card-doctor__link-review {
+    display: flex;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration-line: underline;
+    color: #4E4E4E;
+    transition: 0.3s ease;
+}
+
+.card-doctor__link-review:hover,
+.card-doctor__link-review:focus {
+    text-decoration: none;
+}
+
+.card-doctor__img-wrapper {
+    margin-bottom: 8px;
+}
+
+.card-doctor .card-doctor__stars-container {
+    margin-bottom: 8px;
+}
+
+.card-doctor__main-content {
+    padding: 0 24px;
+}
+
+.card-doctor__appointment {
+    margin-left: auto;
+    flex-basis: 430px;
+}
+
+.card-doctor__name {
+    margin-bottom: 7px;
+}
+
+.card-doctor__name-link {
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 32px;
+    color: #0070C0;
+}
+
+.card-doctor__spec {
+    font-size: 16px;
+    color: #5a5c61;
+    margin-bottom: 12px;
+}
+
+.card-doctor__experience {
+    color: #5a5c61;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.card-doctor__appointment-wrapper {
+    display: flex;
+    margin-bottom: 32px;
+}
+
+.card-doctor__appointment-item {
+    background-color: #f2f8fc;
+    padding: 16px;
+    border: 1px solid #0070c0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.card-doctor__appointment-icon {
+    margin-bottom: 10px;
+}
+
+.card-doctor__appointment-text {
+    margin-bottom: 8px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: 0.15px;
+    text-transform: uppercase;
+    color: #0070C0;
+}
+
+.card-doctor__appointment-price {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #0070C0;
+}
+
+.card-doctor__phone-title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #4E4E4E;
+    margin-bottom: 4px;
+}
+
+.card-doctor__phone {
+    display: flex;
+    align-items: center;
+}
+
+.card-doctor__phone-icon {
+    width: 23px;
+    height: 22px;
+    background: url("../images/icon-call-calling.svg") no-repeat;
+    background-size: cover;
+    margin-right: 8px;
+}
+
+.card-doctor__phone-num {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    color: #181D21;
+}
+
+/*рейтинг доктора*/
+.rating-result {
+    display: flex;
+    justify-content: center;
+}
+
+.rating-result span {
+    padding: 0;
+    font-size: 20px;
+    margin: 0 2px;
+    line-height: 1;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+}
+
+.rating-result > span:before {
+    content: '★';
+}
+
+.rating-result > span.active {
+    color: gold;
+    text-shadow: 1px 1px #c60;
+}
+/*рейтинг доктора*/
+
+.time-quantums-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+.time-quantums-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.time-quantums-navigation button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.time-quantum-nav-week {
+    font-size: 16px;
+}
+
+.time-quantum-day__wrapper {
+    text-align: center;
+    width: 100%;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.time-quantums-days {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.time-quantum-day {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+}
+
+.time-quantum-day__wrapper.active {
+    background-color: #f5f5f5;
+}
+
+.time-quantums-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(100px, 1fr));
+    padding: 20px 20px;
+    gap: 15px;
+}
+
+.time-quantum-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: #FFFFFF;
+    border-radius: 6px;
+    background-color: rgb(0, 112, 192);
+    border-color: rgb(0, 112, 192);
+    cursor: pointer;
+}
+
+.time-quantum-slot-time {
+    font-weight: bold;
+}
+
+.time-quantum-slot-status {
+    color: #999;
+}
+
+.time-quantum-slot-status.booked {
+    color: #ff6666;
+}
+
+.time-quantum-slot-status.available {
+    color: #8bc34a;
+}
+
+.card-doctor__choice-clinic {
+    width: 100%;
+    border: 2px solid lightgrey;
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+}

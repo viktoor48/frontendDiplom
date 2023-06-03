@@ -1,0 +1,202 @@
+.appointment-doctor {
+    padding: 10px;
+}
+
+.appointment-doctor__title {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 135%;
+    letter-spacing: 0;
+    margin-bottom: 24px;
+}
+
+.appointment-doctor__inner {
+    display: flex;
+    /*justify-content: center;*/
+}
+
+.appointment-doctor__main {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    padding: 24px;
+}
+
+.appointment-doctor__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.appointment-doctor__img-wrapper {
+    max-width: 90px;
+    margin-right: 20px;
+}
+
+.appointment-doctor__info-doctor {
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment-doctor__name {
+    margin-bottom: 4px;
+}
+
+.appointment-doctor__clinic-info {
+    margin-bottom: 16px;
+}
+
+.appointment-doctor__description {
+
+}
+
+.appointment-doctor__speciality-row {
+    display: flex;
+}
+
+.appointment-doctor__speciality-row + .appointment-doctor__speciality-row {
+    margin-top: 16px;
+}
+
+.appointment-doctor__speciality-label {
+
+}
+
+.appointment-doctor__label-text {
+    width: 100%;
+}
+
+.appointment-doctor__speciality-radio {
+    cursor: pointer;
+    /*display: none;*/
+}
+
+.appointment-doctor__speciality-label {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/*стили для кастомного радио баттона*/
+/*.appointment-doctor__speciality-label {*/
+/*    position: relative;*/
+/*    margin-bottom: 20px;*/
+/*    margin-right: 10px;*/
+/*    padding-left: 20px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.appointment-doctor__speciality-label:before {*/
+/*    content: '';*/
+/*    width: 20px;*/
+/*    height: 20px;*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    background-color: #ffffff;*/
+/*    border: 1px solid #E3E2E2;*/
+/*    border-radius: 100px;*/
+/*}*/
+
+/*.appointment-doctor__speciality-label.active:after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    width: 8px;*/
+/*    height: 8px;*/
+/*    background-color: #0070c0;*/
+/*    border-radius: 10px;*/
+/*    top: 6px;*/
+/*    left: 6px;*/
+/*}*/
+
+/*.appointment-doctor__speciality-label.active:before {*/
+/*    border: 2px solid #0070c0;*/
+/*}*/
+
+.appointment-doctor__label-text-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.appointment-doctor__label-title {
+    color: #111;
+    letter-spacing: 0;
+    font-size: 16px;
+    line-height: 125%;
+}
+
+.appointment-doctor__label-price {
+    color: #4e4e4e;
+    letter-spacing: 0;
+    font-size: 16px;
+    line-height: 125%;
+}
+
+.appointment-doctor__calendar-wrapper {
+    margin: 24px 0;
+}
+
+.appointment-doctor__calendar {
+    background-color: #f2f8fc;
+    min-height: 56px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 4px;
+}
+
+.appointment-doctor__input-wrapper {
+    border: 1px solid #C7D3D9;
+    border-radius: 5px;
+}
+
+.appointment-doctor__input {
+    width: 100%;
+    padding: 11px;
+    border-radius: 5px;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 21px;
+}
+
+.appointment-doctor__input-wrapper:hover {
+    border-color: black;
+}
+
+.messages-wrapper {
+    min-height: 14px;
+    min-width: 1px;
+    position: relative;
+    padding: 8px;
+}
+
+.messages__message {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.error--text {
+    color: #ec2327 !important;
+    caret-color: #ec2327 !important;
+    line-height: 12px;
+    word-break: break-word;
+}
+
+.input-error {
+    color: #ec2327 !important;
+    caret-color: #ec2327 !important;
+    border-color: #ec2327 !important;
+}
+
+.input-error input::placeholder {
+    color: #ec2327;
+}
+
+.appointment-doctor__btn-wrapper {
+    margin-top: 24px;
+}
+
+.appointment-doctor__btn {
+    margin-left: auto;
+    font-size: 16px;
+}
