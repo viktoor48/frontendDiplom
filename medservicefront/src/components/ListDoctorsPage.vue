@@ -9,6 +9,7 @@
             <div class="card-doctor__avatar">
               <div class="card-doctor__profile">
                 <div class="card-doctor__img-wrapper">
+<!--                  card-doctor__favorite-wrapper active для красного сердца-->
                   <div class="card-doctor__favorite-wrapper">
                     <div class="card-doctor__favorite-icon"></div>
                   </div>
@@ -53,91 +54,10 @@
               </div>
             </div>
             <div class="card-doctor__appointment">
-              <select class="card-doctor__choice-clinic" name="choiceClinic">
-                <option v-if="doctor.getClinics.length === 0" value="default">Не привязан к клинике</option>
-                <option v-else v-for="clinic in doctor.getClinics" :key="clinic.id" :value="clinic.name">{{ clinic.name }}</option>
-              </select>
               <TimeQuantumComponent :doctor="doctor"></TimeQuantumComponent>
             </div>
           </div>
         </div>
-<!--        <div class="card-doctor">-->
-<!--          <div class="card-doctor__row">-->
-<!--            <div class="card-doctor__avatar">-->
-<!--              <div class="card-doctor__profile">-->
-<!--                <div class="card-doctor__img-wrapper">-->
-<!--                  <div class="card-doctor__favorite-wrapper active">-->
-<!--                    <div class="card-doctor__favorite-icon"></div>-->
-<!--                  </div>-->
-<!--                  <img src="../images/avatarDoctor.png" alt="">-->
-<!--                </div>-->
-<!--                <div class="card-doctor__stars-container">-->
-<!--                  <div class="rating-result">-->
-<!--                    <span class="active"></span>-->
-<!--                    <span class="active"></span>-->
-<!--                    <span class="active"></span>-->
-<!--                    <span class="active"></span>-->
-<!--                    <span></span>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <a href="#" class="card-doctor__link-review">-->
-<!--                  27&nbsp;отзывов-->
-<!--                </a>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="card-doctor__main-content">-->
-<!--              <div class="card-doctor__info">-->
-<!--                <div class="card-doctor__name">-->
-<!--                  <a href="#doctorDetail" class="card-doctor__name-link">Молчанова Валентина Ивановна</a>-->
-<!--                </div>-->
-<!--                <div class="card-doctor__spec">Гинеколог, акушер, врач УЗИ</div>-->
-<!--                <div class="card-doctor__experience">Стаж 16 лет</div>-->
-<!--                <div class="card-doctor__appointment-wrapper">-->
-<!--                  <div class="card-doctor__appointment-item">-->
-<!--                    <div class="card-doctor__appointment-icon">-->
-<!--                      <img src="../images/icon-clinic.svg" class="appointment__icon" alt="">-->
-<!--                    </div>-->
-<!--                    <div class="card-doctor__appointment-text">В клинике</div>-->
-<!--                    <div class="card-doctor__appointment-price">от&nbsp;800&nbsp;₽</div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="card-doctor__phone-container">-->
-<!--                  <div class="card-doctor__phone-title">Запись на приём:</div>-->
-<!--                  <div class="card-doctor__phone">-->
-<!--                    <div class="card-doctor__phone-icon"></div>-->
-<!--                    <div class="card-doctor__phone-num">(4742) 52-26-07</div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="card-doctor__appointment">-->
-<!--              <div class="time-quantums-container">-->
-<!--                <div class="time-quantums-navigation">-->
-<!--                  <button class="time-quantum-nav-button time-quantum-nav-back">&#8249;</button>-->
-<!--                  <div class="time-quantum-nav-week">1-7 декабря</div>-->
-<!--                  <button class="time-quantum-nav-button time-quantum-nav-forward">&#8250;</button>-->
-<!--                </div>-->
-<!--                <div class="time-quantums-days">-->
-<!--                  <div class="time-quantum-day">Пн</div>-->
-<!--                  <div class="time-quantum-day active">Вт</div>-->
-<!--                  <div class="time-quantum-day">Ср</div>-->
-<!--                  <div class="time-quantum-day">Чт</div>-->
-<!--                  <div class="time-quantum-day">Пт</div>-->
-<!--                  <div class="time-quantum-day">Сб</div>-->
-<!--                  <div class="time-quantum-day">Вс</div>-->
-<!--                </div>-->
-<!--                <div class="time-quantums-slots">-->
-<!--                  <div class="time-quantum-slot">-->
-<!--                    <div class="time-quantum-slot-time">8:00-10:00</div>-->
-<!--                  </div>-->
-<!--                  <div class="time-quantum-slot">-->
-<!--                    <div class="time-quantum-slot-time">10:00-12:00</div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
     </div>
   </main>
@@ -157,6 +77,7 @@ export default {
   data() {
     return {
       isLoading: true,
+      selectedClinic: '',
     };
   },
   methods: {
@@ -173,7 +94,6 @@ export default {
       this.addPropertyToDoctors(updatedDoctors, 'timeSlots', allTimeSlots);
       this.addPropertyToDoctors(updatedDoctors, 'clinics', allClinics);
 
-      console.log(updatedDoctors);
       return updatedDoctors;
     },
     addPropertyToDoctors(doctors, propertyName, allElements) {

@@ -1,4 +1,3 @@
-
 export function patchMethod(url, data) {
     const headers = {
         "accept": "application/ld+json",
