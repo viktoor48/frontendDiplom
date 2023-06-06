@@ -4,11 +4,11 @@
     <div class="form-wrapper">
       <div class="container">
         <div class="form__item-wrapper">
-          <form action="#" class="form__item">
+          <form action="#" @submit.prevent="onSubmit" class="form__item">
             <h1 class="form__title form__title-text">Личный кабинет пациента</h1>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
-                <input type="text" placeholder="Почта" class="input">
+                <input v-model="login" type="text" placeholder="Почта" class="input">
               </div>
               <div class="messages-wrapper">
                 <div class="messages__message error--text"></div>
@@ -16,7 +16,7 @@
             </div>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
-                <input type="text" placeholder="Пароль" class="input">
+                <input v-model="password" type="text" placeholder="Пароль" class="input">
               </div>
               <div class="messages-wrapper">
                 <div class="messages__message error--text"></div>
@@ -39,6 +39,9 @@
 <script>
 import HeaderMin from "@/components/HeaderMin";
 import FooterComponent from "@/components/FooterComponent";
+import {UserRoles} from "@/constants/constants";
+import router from "@/router";
+
 export default {
   name: "FormEnterPatient",
   components: {
@@ -46,12 +49,29 @@ export default {
   },
   data() {
     return {
-
+      login: '',
+      password: '',
     }
+  },
+  methods: {
+    async onSubmit() {
+      //нужно будет добавить валидацию
+      await this.$store.dispatch('onLogin', {
+        login: this.login,
+        password: this.password,
+        role: UserRoles.Client,
+      });
+      const token = this.$store.getters.getToken;
+      const userRole = this.$store.getters.getUserRole;
+      if (token == null) {
+        alert('такого нету');
+      } else {
+        console.log(token);
+        console.log(userRole);
+        router.push({name: 'home'});
+      }
+      //тут должен быть then и дальнейший редирект на дом страницу, сначала реализовать метод onLogin, а в нем проверку на сущ пользователя;
+    },
   },
 }
 </script>
-
-<style scoped>
-
-</style>

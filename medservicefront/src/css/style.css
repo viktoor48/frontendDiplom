@@ -130,6 +130,10 @@ img {
     margin-right: 2px;
 }
 
+.user-nav {
+    display: flex;
+}
+
 .user-nav__item {
     position: relative;
 }

@@ -18,11 +18,14 @@
           <div class="header__column">
             <nav class="header__menu">
               <ul class="user-nav">
-                <li @click="openPopup" class="user-nav__item" id="link-enter" >
+                <li v-if="token == null" class="user-nav__item" id="link-enter" >
                   <a class="user-nav__link button" href="#">
                     Войти
                   </a>
                   <FormEnterPopup></FormEnterPopup>
+                </li>
+                <li v-else class="user-nav__item">
+                  <a class="user-nav__link button" :href="`#${userRole}Profile`">Личный кабинет</a>
                 </li>
               </ul>
             </nav>
@@ -55,14 +58,31 @@ export default {
 
   data() {
     return {
-
+      token: this.$store.getters.getToken,
+      userRole: this.$store.getters.getUserRole,
     }
   },
   methods: {
 
   },
-  mounted() {
+  watch: {
+    token(old) {
+      console.log(old);
+    }
+  },
+  computed: {
+    isToken() {
+      return this.$store.getters.getToken;
+    },
+    getRole() {
+      return this.$store.getters.getUserRole;
+    },
+  },
+  created() {
 
+  },
+  mounted() {
+    console.log(this.token);
   }
 }
 </script>

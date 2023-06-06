@@ -10,10 +10,14 @@ import ClinicDetailPage from "@/components/ClinicDetailPage";
 import FormEnterPatient from "@/components/FormEnterPatient";
 import FormEnterDoctor from "@/components/FormEnterDoctor";
 import FormEnterClinic from "@/components/FormEnterClinic";
+import ClientProfile from "@/components/ClientProfile";
+import DoctorProfile from "@/components/DoctorProfile";
+import ClinicProfile from "@/components/ClinicProfile";
 
 const routes = [
   {
     path: '/',
+    name: 'home',
     component: MainPage,
     alias: '/'
   },
@@ -67,7 +71,22 @@ const routes = [
     path: '/formEnterClinic',
     name: 'formEnterClinic',
     component: FormEnterClinic,
-  }
+  },
+  {
+    path: '/clientProfile',
+    name: 'clientProfile',
+    component: ClientProfile,
+  },
+  {
+    path: '/clinicProfile',
+    name: 'clinicProfile',
+    component: ClinicProfile,
+  },
+  {
+    path: '/doctorProfile',
+    name: 'doctorProfile',
+    component: DoctorProfile,
+  },
 ]
 
 const router = createRouter({
