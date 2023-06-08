@@ -120,7 +120,7 @@
             <div class="personal-area__exit-icon-wrapper">
               <img src="../images/icon-exit.svg" alt="">
             </div>
-            <div class="personal-area__exit-content">
+            <div @click="onLogout" class="personal-area__exit-content">
               <div class="personal-area__exit-title text_subtitle-1">Выйти</div>
               <div class="personal-area__exit-subtitle text_subtitle-2">выход из аккаунта</div>
             </div>
@@ -135,12 +135,18 @@
 <script>
 import HeaderMin from "@/components/HeaderMin";
 import FooterComponent from "@/components/FooterComponent";
+import router from "@/router";
 export default {
   name: "DoctorProfile",
   components: {
     HeaderMin, FooterComponent,
-  }
-
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch('onLogout');
+      router.push({name: 'home'});
+    },
+  },
 }
 </script>
 

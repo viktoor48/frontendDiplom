@@ -1,5 +1,5 @@
 import {UserRoles} from "@/constants/constants";
-import {AuthAPI} from "@/AuthAPI";
+import {AuthAPI, RegistrationApi} from "@/Api";
 
 export default {
     mutations: {
@@ -38,6 +38,13 @@ export default {
             ctx.commit('deleteToken');
             ctx.commit('deleteUserRole');
         },
+        async onRegister(ctx, {form, role}) {
+            try {
+                await RegistrationApi.register(form, role);
+            } catch (error) {
+                return error;
+            }
+        }
     },
     state: {
         credentials: {

@@ -19,5 +19,22 @@ export const AuthAPI = {
         }
 
         return user;
+    },
+}
+
+export const RegistrationApi = {
+    async register(data, role) {
+        try {
+            await AuthAPI.login(data.login, data.password, role);
+            const error = new Error('Пользователь с таким email уже существует');
+            return error;
+        } catch (error) {
+            if (error.status >= 400) {
+                //сработает если пользователь не найден
+                console.log(error);
+                return error;
+            }
+        }
     }
 }
+
