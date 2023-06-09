@@ -29,12 +29,19 @@ export const RegistrationApi = {
             const error = new Error('Пользователь с таким email уже существует');
             return error;
         } catch (error) {
+            console.log(JSON.stringify(data));
             if (error.status >= 400) {
-                //сработает если пользователь не найден
-                console.log(error);
-                return error;
+                const response = await fetch(`http://localhost:8000/api/${role}s`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                return response.json();
             }
         }
     }
 }
+
 

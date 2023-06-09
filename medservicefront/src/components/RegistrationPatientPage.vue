@@ -8,42 +8,42 @@
             <h1 class="form__title form__title-text">Регистрация пациента</h1>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
-                <input v-model="form.firstName" type="text" placeholder="Имя" required class="input">
+                <input v-model="form.name" type="text" placeholder="Имя" required class="input">
               </div>
               <div class="messages-wrapper">
-                <div class="messages__message error--text">{{ errors.firstName }}</div>
+                <div class="messages__message error--text">{{ errors.name }}</div>
               </div>
             </div>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
-                <input v-model="form.lastName" type="text" placeholder="Фамилия" required class="input">
+                <input v-model="form.surname" type="text" placeholder="Фамилия" required class="input">
               </div>
               <div class="messages-wrapper">
-                <div class="messages__message error--text">{{ errors.lastName }}</div>
+                <div class="messages__message error--text">{{ errors.surname }}</div>
               </div>
             </div>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
-                <input v-model="form.patronymic" type="text" placeholder="Отчество" class="input">
+                <input v-model="form.lastname" type="text" placeholder="Отчество" class="input">
               </div>
               <div class="messages-wrapper">
-                <div class="messages__message error--text">{{ errors.patronymic }}</div>
+                <div class="messages__message error--text">{{ errors.lastname }}</div>
               </div>
             </div>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
-                <input v-model="form.phone" type="text" placeholder="Телефон" required class="input">
+                <input v-model="form.number" type="text" placeholder="Телефон" required class="input">
               </div>
               <div class="messages-wrapper">
-                <div class="messages__message error--text">{{ errors.phone }}</div>
+                <div class="messages__message error--text">{{ errors.number }}</div>
               </div>
             </div>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
-                <input v-model="form.dateOfBirth" type="date" placeholder="Дата" required class="input">
+                <input v-model="form.date" type="date" placeholder="Дата" required class="input">
               </div>
               <div class="messages-wrapper">
-                <div class="messages__message error--text">{{ errors.dateOfBirth }}</div>
+                <div class="messages__message error--text">{{ errors.date }}</div>
               </div>
             </div>
             <div class="form__field-wrapper">
@@ -94,6 +94,7 @@ import HeaderMin from "@/components/HeaderMin";
 import FooterComponent from "@/components/FooterComponent";
 import * as Yup from "yup";
 import {UserRoles} from "@/constants/constants";
+import router from "@/router";
 
 export default {
   name: "RegistrationPatientPage",
@@ -103,11 +104,11 @@ export default {
   data() {
     return {
       form: {
-        firstName: "",
-        lastName: "",
-        patronymic: "",
-        phone: "",
-        dateOfBirth: "",
+        name: "",
+        surname: "",
+        lastname: "",
+        number: "",
+        date: "",
         gender: "",
         email: "",
         password: "",
@@ -119,20 +120,20 @@ export default {
   methods: {
     async onSubmit() {
       const schema = Yup.object().shape({
-        firstName: Yup.string()
+        name: Yup.string()
             .max(20, "Максимальная длина имени - 20 символов")
             .required("Поле Имя обязательно для заполнения"),
-        lastName: Yup.string()
+        surname: Yup.string()
             .max(30, "Максимальная длина фамилии - 30 символов")
             .required("Поле Фамилия обязательно для заполнения"),
-        patronymic: Yup.string().max(
+        lastname: Yup.string().max(
             30,
             "Максимальная длина отчества - 30 символов"
         ),
-        phone: Yup.string()
+        number: Yup.string()
             .matches(/^(\+7|8)\d{10}$/, "Введите корректный номер телефона")
             .required("Поле Телефон обязательно для заполнения"),
-        dateOfBirth: Yup.date()
+        date: Yup.date()
             .required("Поле Дата рождения обязательно для заполнения"),
         gender: Yup.string().required("Поле Пол обязательно для заполнения"),
         email: Yup.string()
@@ -156,6 +157,7 @@ export default {
         this.errors = {};
 
         await this.$store.dispatch('onRegister', {form: this.form, role: UserRoles.Client});
+        router.push({name: 'home'});
       } catch (error) {
         const errors = error.inner ? error.inner.reduce((acc, curr) => {
           acc[curr.path] = curr.message;

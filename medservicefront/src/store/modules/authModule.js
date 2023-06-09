@@ -40,7 +40,10 @@ export default {
         },
         async onRegister(ctx, {form, role}) {
             try {
-                await RegistrationApi.register(form, role);
+                const response = await RegistrationApi.register(form, role);
+                const id = response.id;
+                ctx.commit('setToken', id);
+                ctx.commit('setUserRole', role);
             } catch (error) {
                 return error;
             }
