@@ -21,7 +21,6 @@ export default {
         },
     },
     actions: {
-        // eslint-disable-next-line no-unused-vars
         async onLogin(ctx, {login, password, role}) {
             try {
                 const user = await AuthAPI.login(login, password, role);
@@ -41,9 +40,17 @@ export default {
         async onRegister(ctx, {form, role}) {
             try {
                 const response = await RegistrationApi.register(form, role);
+
+                if (response.status >= 400) {
+                    const errorMessage = response.statusText || 'Unknown error';
+                    const error = new Error(errorMessage);
+                    error.status = response.status;
+                    throw error;
+                }
                 const id = response.id;
                 ctx.commit('setToken', id);
                 ctx.commit('setUserRole', role);
+                return true;
             } catch (error) {
                 return error;
             }
@@ -53,7 +60,7 @@ export default {
         credentials: {
             token: localStorage.getItem('token') || null,
             userRole: localStorage.getItem('userRole') || UserRoles.Guest,
-        }
+        },
     },
     getters: {
         getUserRole(state) {

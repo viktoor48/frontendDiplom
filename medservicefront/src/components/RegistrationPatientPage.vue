@@ -156,8 +156,12 @@ export default {
         await schema.validate(this.form, { abortEarly: false });
         this.errors = {};
 
-        await this.$store.dispatch('onRegister', {form: this.form, role: UserRoles.Client});
-        router.push({name: 'home'});
+        const response = await this.$store.dispatch('onRegister', {form: this.form, role: UserRoles.Client});
+        if (response.status >= 400) {
+          alert('Пользователь с таким email уже существует');
+        } else {
+          router.push({name: 'home'});
+        }
       } catch (error) {
         const errors = error.inner ? error.inner.reduce((acc, curr) => {
           acc[curr.path] = curr.message;

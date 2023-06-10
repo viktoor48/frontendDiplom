@@ -2,14 +2,15 @@
   <HeaderMin></HeaderMin>
   <main class="main-wrapper">
     <div class="min-container">
-      <div class="personal-area">
+      <div v-if="isLoading" class="loading-spinner"></div>
+      <div v-else class="personal-area">
         <div class="personal-area__profile">
           <div class="personal-area__profile-row">
             <div class="personal-area__avatar-wrapper">
               <img src="../images/icon-profile.svg" alt="">
             </div>
             <div class="personal-area__column">
-              <div class="personal-area__title">+7 919 256-93-30</div>
+              <div class="personal-area__title">{{ getClient.number }}</div>
               <div class="personal-area__subtitle">Профиль</div>
             </div>
           </div>
@@ -19,7 +20,7 @@
                 <img src="../images/icon-phone.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="number" placeholder="+7 (919) 256-93-30" class="personal-area__data-text">
+                <input type="number" :placeholder="`${getClient.number}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -27,7 +28,7 @@
                 <img src="../images/icon-edit.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" placeholder="Косенков Виктор Дмитриевич" class="personal-area__data-text">
+                <input type="text" :placeholder="`${getClient.surname} ${getClient.name} ${getClient.lastname}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -35,7 +36,7 @@
                 <img src="../images/icon-calendar.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" placeholder="Дата рождения" class="personal-area__data-text">
+                <input type="text" :placeholder="`${extractDate(getClient.date)}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -43,7 +44,7 @@
                 <img src="../images/icon-mail.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" placeholder="kosenkov.viktor@list.ru" class="personal-area__data-text">
+                <input type="text" :placeholder="`${getClient.email}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -51,7 +52,7 @@
                 <img src="../images/icon-gender.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" placeholder="Мужской" class="personal-area__data-text">
+                <input type="text" :placeholder="`${getClient.gender}`" class="personal-area__data-text">
               </div>
             </div>
           </div>
@@ -175,12 +176,65 @@ import router from "@/router";
 export default {
   name: "clientProfile",
   components: {HeaderMin, FooterComponent},
+  data() {
+    return {
+      isLoading: true,
+    }
+  },
+  computed: {
+    getClient() {
+      const client = this.$store.getters.getCurrentClient;
+      let slots = this.$store.getters.allTimeSlots;
+      this.addPropertyToClient(client, 'timeSlots', slots);
+      console.log(client);
+      return client;
+    }
+  },
   methods: {
     onLogout() {
       this.$store.dispatch('onLogout');
       router.push({name: 'home'});
     },
+    extractDate(dateString) {
+      const date = new Date(dateString);
+
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+
+      return `${day}.${month}.${date.getFullYear()}`;
+    },
+    addPropertyToClient(client, propertyName, allElements) {
+        let elementIds = client[propertyName];
+        elementIds = this.getIdFromUrl(elementIds);
+
+        let elements = [];
+
+        elementIds.forEach(elementId => {
+          let element = allElements.find(e => e.id === elementId);
+          elements.push(element);
+        });
+
+        client['get' + propertyName.charAt(0).toUpperCase() + propertyName.slice(1)] = elements;
+
+      return client;
+    },
+    getIdFromUrl(array) {
+      return array.map(url => {
+        const parts = url.split('/');
+        return parseInt(parts[parts.length-1]);
+      })
+    },
   },
+  async mounted() {
+    try {
+      const id = await this.$store.getters.getToken;
+      await this.$store.dispatch('fetchClient', id);
+      await this.$store.dispatch('fetchTimeSlots');
+      this.isLoading = false;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 </script>
 

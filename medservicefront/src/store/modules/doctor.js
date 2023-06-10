@@ -8,7 +8,10 @@ export default {
         },
         updateTimeSlots(state, slots) {
             state.timeSlots = slots;
-        }
+        },
+        updateCurrentDoctor(state, doctor) {
+            state.currentDoctor = doctor;
+        },
     },
     actions: {
         async fetchDoctors(ctx) {
@@ -17,6 +20,12 @@ export default {
             const doctors = [...result['hydra:member']];
 
             ctx.commit('updateDoctors', doctors);
+        },
+        async fetchDoctor(ctx, id) {
+            const response = await fetch(`http://localhost:8000/api/doctors/${id}`);
+            const result = await response.json();
+
+            ctx.commit('updateCurrentDoctor', result);
         },
         async fetchServices(ctx) {
             const response = await fetch('http://localhost:8000/api/services');
@@ -37,6 +46,7 @@ export default {
         doctors: [],
         services: [],
         timeSlots: [],
+        currentDoctor: {},
     },
     getters: {
         allDoctors(state) {
@@ -47,6 +57,9 @@ export default {
         },
         allTimeSlots(state) {
           return state.timeSlots;
+        },
+        getCurrentDoctor(state) {
+            return state.currentDoctor;
         },
     },
 }

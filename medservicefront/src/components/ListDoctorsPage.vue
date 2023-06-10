@@ -88,7 +88,7 @@ export default {
       })
     },
     modifiedDoctorsObject(doctors, allClinics, allServices, allTimeSlots) {
-       let updatedDoctors = doctors;
+      let updatedDoctors = doctors;
 
       this.addPropertyToDoctors(updatedDoctors, 'services', allServices);
       this.addPropertyToDoctors(updatedDoctors, 'timeSlots', allTimeSlots);
