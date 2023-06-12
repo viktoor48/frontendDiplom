@@ -66,46 +66,18 @@
         <div class="personal-area__item-container">
           <div class="personal-area__record-title big-title">Записи на прием</div>
           <div class="personal-area__record-list">
-            <div class="personal-area__record-item doctor-card__min">
+            <div v-for="slot in getClient.getTimeSlots" :key="slot.id" class="personal-area__record-item doctor-card__min">
               <div class="doctor-card__left-side">
                 <div class="doctor-card__img-wrapper">
-                  <img src="../images/avatarDoctor.png" alt="">
+                  <img :src="require('../images/' + slot.getDoctor.photo)" alt="">
                 </div>
               </div>
               <div class="doctor-card__right-side">
                 <div class="doctor-card__date secondary-text">
-                  13 мая (сб), 10:40
+                  {{this.formatDateAndTime(slot.date, slot.start)}}
                 </div>
-                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>
-                <div class="doctor-card__service secondary-text">Акушер</div>
-              </div>
-            </div>
-            <div class="personal-area__record-item doctor-card__min">
-              <div class="doctor-card__left-side">
-                <div class="doctor-card__img-wrapper">
-                  <img src="../images/avatarDoctor.png" alt="">
-                </div>
-              </div>
-              <div class="doctor-card__right-side">
-                <div class="doctor-card__date secondary-text">
-                  13 мая (сб), 10:40
-                </div>
-                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>
-                <div class="doctor-card__service secondary-text">Акушер</div>
-              </div>
-            </div>
-            <div class="personal-area__record-item doctor-card__min">
-              <div class="doctor-card__left-side">
-                <div class="doctor-card__img-wrapper">
-                  <img src="../images/avatarDoctor.png" alt="">
-                </div>
-              </div>
-              <div class="doctor-card__right-side">
-                <div class="doctor-card__date secondary-text">
-                  13 мая (сб), 10:40
-                </div>
-                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>
-                <div class="doctor-card__service secondary-text">Акушер</div>
+                <div class="doctor-card__name text_subtitle-1">{{`${slot.getDoctor.surname } ${slot.getDoctor.name } ${slot.getDoctor.lastname }`}}</div>
+                <div class="doctor-card__service secondary-text">{{slot.getService.name}}</div>
               </div>
             </div>
           </div>
@@ -183,17 +155,55 @@ export default {
   },
   computed: {
     getClient() {
-      const client = this.$store.getters.getCurrentClient;
-      let slots = this.$store.getters.allTimeSlots;
+      let client = this.$store.getters.getCurrentClient;
+      const slots = this.$store.getters.allTimeSlots;
+      const doctors = this.$store.getters.allDoctors;
+      const services = this.$store.getters.allServices;
+
       this.addPropertyToClient(client, 'timeSlots', slots);
+      this.addPropertyToProperty(client.getTimeSlots, 'doctor', doctors);
+      this.addPropertyToProperty(client.getTimeSlots, 'service', services);
+
       console.log(client);
       return client;
-    }
+    },
   },
   methods: {
     onLogout() {
       this.$store.dispatch('onLogout');
       router.push({name: 'home'});
+    },
+    extractTime(str) {
+      const regex = /\d{4}-\d{2}-\d{2}T(\d{2}:\d{2})/;
+      const match = str.match(regex);
+      return match ? match[1] : null;
+    },
+    addPropertyToProperty(arrayProperty, propertyName,allElements) {
+      arrayProperty.forEach(property => {
+        let elementId = property[propertyName];
+        const parts = elementId.split('/');
+        elementId = parseInt(parts[parts.length-1]);
+
+        let elements = {};
+
+
+        let element = allElements.find(e => e.id === elementId);
+        elements = element;
+
+        property['get' + propertyName.charAt(0).toUpperCase() + propertyName.slice(1)] = elements;
+      });
+    },
+    formatDateAndTime(dateString, startString) {
+      const date = new Date(dateString);
+      const monthNames = [
+        "Янв", "Фев", "Мар", "Апр", "Май", "Июн",
+        "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"
+      ];
+      const dayNames = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+
+      const output = `${date.getDate()} ${monthNames[date.getMonth()]} (${dayNames[date.getDay()]}),
+      ${this.extractTime(startString)}`;
+      return output;
     },
     extractDate(dateString) {
       const date = new Date(dateString);
@@ -230,6 +240,8 @@ export default {
       const id = await this.$store.getters.getToken;
       await this.$store.dispatch('fetchClient', id);
       await this.$store.dispatch('fetchTimeSlots');
+      await this.$store.dispatch('fetchDoctors');
+      await this.$store.dispatch('fetchServices');
       this.isLoading = false;
     } catch (error) {
       console.log(error);

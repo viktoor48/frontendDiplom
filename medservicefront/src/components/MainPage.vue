@@ -2,7 +2,8 @@
   <HeaderBig></HeaderBig>
   <div class="intro-stat__wrapper">
     <div class="container">
-      <div class="intro-stat">
+      <div v-if="isLoading" class="loading-spinner"></div>
+      <div v-else class="intro-stat">
         <div class="intro-stat__item">
           <div class="intro-stat__img background-review"></div>
           <div class="intro-stat__text">
@@ -80,7 +81,6 @@
 <script>
 import HeaderBig from "@/components/HeaderBig";
 import FooterComponent from "@/components/FooterComponent";
-import {patchMethod, getMethod} from "@/assets/apiMethods";
 
 export default {
   name: "MainPage",
@@ -89,35 +89,11 @@ export default {
   },
   data() {
     return {
-      doctors: [],
-      clinics: [],
-      reviewDoctors: [],
-      reviewClinics: [],
-      timeSlots: [],
+      isLoading: true,
     };
   },
 
   methods: {
-    getClinics() {
-      fetch('http://localhost:8000/api/clinics?page=1')
-          .then((response) => response.json())
-          .then((data) => this.clinics = [...data['hydra:member']]);
-    },
-    getDoctors() {
-      fetch('http://localhost:8000/api/doctors?page=1')
-          .then((response) => response.json())
-          .then((data) => this.doctors = [...data['hydra:member']]);
-    },
-    getReviewsClinics() {
-      fetch('http://localhost:8000/api/review_clinics?page=1')
-          .then((response) => response.json())
-          .then((data) => this.reviewClinics = [...data['hydra:member']]);
-    },
-    getReviewsDoctors() {
-      fetch('http://localhost:8000/api/review_doctors?page=1')
-          .then((response) => response.json())
-          .then((data) => this.reviewDoctors = [...data['hydra:member']]);
-    },
     specializationCount(array) {
       const specialtiesCount = {};
 
@@ -131,69 +107,35 @@ export default {
 
       return specialtiesCount;
     },
-    getTimeSlots() {
-      getMethod('http://localhost:8000/api/time_slots?page=1')
-          .then((response) => response.json())
-          .then((data) => this.timeSlots = [...data['hydra:member']]);
-    },
-    patchClinic(id, data) {
-      //добавить параметр для передачи объекта данных которые нужно изменить
-      const url = `http://localhost:8000/api/clinics/${id}`;
-
-      patchMethod(url, data)
-          .then((response) => {
-
-            if (!response.ok) {
-              throw new Error('Error occurred');
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => console.log(error));
-
-      // const data = {
-      //   "photo": "ggfgfh",
-      // это для привязки доктора к клиники
-      //   "doctor": [
-      //     "/api/doctors/2"
-      //   ],
-      // };
-    },
   },
   computed: {
     countDoctors: function (){
-      this.getReviewsClinics();
-      this.getReviewsDoctors();
-      return this.doctors.length;
+      return this.$store.getters.allDoctors.length;
     },
     countClinics: function (){
-      return this.clinics.length;
+      return this.$store.getters.allClinics.length;
     },
     specializationDoctors: function (){
-      return this.specializationCount(this.doctors);
+      return this.specializationCount(this.$store.getters.allDoctors);
     },
     specializationClinics: function (){
-      return this.specializationCount(this.clinics);
+      return this.specializationCount(this.$store.getters.allClinics);
     },
     countReviews: function (){
-      return this.reviewDoctors.length + this.reviewClinics.length;
+      return this.$store.getters.getReviewsDoctors.length + this.$store.getters.getReviewsClinics.length;
     },
     countAppointment: function () {
-      const filteredTimeSlots = this.timeSlots.filter((slot) => slot['booked'] === true);
+      const timeSlot = this.$store.getters.allTimeSlots;
+      const filteredTimeSlots = timeSlot.filter((slot) => slot['booked'] === true);
       return filteredTimeSlots.length;
     },
   },
-  created() {
-    this.getClinics();
-    this.getDoctors();
-    this.getReviewsClinics();
-    this.getReviewsDoctors();
-    this.getTimeSlots();
-    this.patchClinic(1, {
-      "photo": "../images/avatarDoctor.png",
-    });
+  async mounted() {
+    await this.$store.dispatch('fetchDoctors');
+    await this.$store.dispatch('fetchClinics');
+    await this.$store.dispatch('fetchTimeSlots');
+    await this.$store.dispatch('fetchReviewsDoctors');
+    this.isLoading = false;
   }
 }
 

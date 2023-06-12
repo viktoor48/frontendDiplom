@@ -4,7 +4,7 @@
     <div class="form-wrapper form-wrapper__registration">
       <div class="container">
         <div class="form__item-wrapper">
-          <form @submit.prevent="onSubmit" action="#" novalidate class="form__item">
+          <form @submit.prevent="onSubmit" novalidate class="form__item">
             <h1 class="form__title form__title-text">Регистрация клиники</h1>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
@@ -54,7 +54,7 @@
             </div>
             <div class="form__field-wrapper">
               <div class="input-wrapper">
-                <input v-model="form.number" type="number" placeholder="Телефон" required class="input">
+                <input v-model="form.number" type="text" placeholder="Телефон" required class="input">
               </div>
               <div class="messages-wrapper">
                 <div class="messages__message error--text">{{ errors.number }}</div>
@@ -85,7 +85,7 @@
               </div>
             </div>
             <div class="form__wrapper-btn">
-              <button class="form__btn button">Зарегистрироваться</button>
+              <button type="submit" class="form__btn button">Зарегистрироваться</button>
             </div>
           </form>
         </div>
@@ -126,15 +126,8 @@ export default {
     async onSubmit() {
       const schema = Yup.object().shape({
         name: Yup.string()
-            .max(20, "Максимальная длина имени - 20 символов")
+            .max(36, "Максимальная длина имени - 36 символов")
             .required("Поле Имя обязательно для заполнения"),
-        surname: Yup.string()
-            .max(30, "Максимальная длина фамилии - 30 символов")
-            .required("Поле Фамилия обязательно для заполнения"),
-        lastname: Yup.string().max(
-            30,
-            "Максимальная длина отчества - 30 символов"
-        ),
         address: Yup.string()
             .required("Поле Адрес обязательно для заполнения"),
         number: Yup.string()
@@ -163,8 +156,8 @@ export default {
       try {
         await schema.validate(this.form, { abortEarly: false });
         this.errors = {};
-
         const response = await this.$store.dispatch('onRegister', {form: this.form, role: UserRoles.Clinic});
+        console.log(response);
         if (response.status >= 400) {
           alert('Пользователь с таким email уже существует');
         } else {
@@ -176,6 +169,7 @@ export default {
           return acc;
         }, {}) : {};
         this.errors = errors;
+        console.log(error);
       }
     },
   },

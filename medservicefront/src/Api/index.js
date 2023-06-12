@@ -45,6 +45,7 @@ export const AuthAPI = {
 
 export const RegistrationApi = {
     async register(data, role) {
+        console.log(data, role);
         try {
             await AuthAPI.findUser(data.email, data.password, role);
             const response = await fetch(`http://localhost:8000/api/${role}s`, {
@@ -54,6 +55,8 @@ export const RegistrationApi = {
                 },
                 body: JSON.stringify(data)
             });
+
+            console.log(response);
             return response.json();
         } catch (error) {
             return error;

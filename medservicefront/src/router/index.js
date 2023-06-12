@@ -14,6 +14,7 @@ import FormEnterClinic from "@/components/FormEnterClinic";
 import ClientProfile from "@/components/ClientProfile";
 import DoctorProfile from "@/components/DoctorProfile";
 import ClinicProfile from "@/components/ClinicProfile";
+import AppointmentDoctor from "@/components/AppointmentDoctor";
 
 
 /**
@@ -126,6 +127,12 @@ const routes = [
     name: 'doctorProfile',
     component: DoctorProfile,
     beforeEnter: doctorAuthGuard,
+  },
+  {
+    path: '/appointmentDoctor',
+    name: 'appointment',
+    component: AppointmentDoctor,
+    beforeEnter: clientAuthGuard,
   },
 ]
 

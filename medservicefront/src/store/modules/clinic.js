@@ -6,6 +6,9 @@ export default {
         updateCurrentClinic(state, clinic) {
           state.currentClinic = clinic;
         },
+        updateReviewsClinics(state, reviews) {
+            state.reviewsClinics = reviews;
+        },
     },
     actions: {
         async fetchClinics(ctx) {
@@ -23,10 +26,18 @@ export default {
 
           ctx.commit('updateCurrentClinic', result);
         },
+        async fetchReviewsClinics(ctx) {
+            const response = await fetch(`http://localhost:8000/api/review_clinics`);
+            const result = await response.json();
+            const reviews = [...result['hydra:member']];
+
+            ctx.commit('updateReviewsClinics', reviews);
+        },
     },
     state: {
         clinics: [],
         currentClinic: {},
+        reviewsClinics: [],
     },
     getters: {
         allClinics(state) {
@@ -34,6 +45,9 @@ export default {
         },
         currentClinic(state) {
             return state.currentClinic;
+        },
+        getReviewsClinics(state) {
+            return state.reviewsClinics;
         },
     },
 }

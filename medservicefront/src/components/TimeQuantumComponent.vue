@@ -17,7 +17,9 @@
     </div>
     <div class="time-quantums-slots">
       <div class="time-quantum-slot" v-for="slot in getCurrentSlots" :key="slot.id">
-        <div class="time-quantum-slot-time">{{ extractTime(slot.start) }} - {{ extractTime(slot.timeEnd) }}</div>
+        <router-link :to="`/appointmentDoctor?id=${slot.id}`">
+          <div class="time-quantum-slot-time">{{ extractTime(slot.start) }} - {{ extractTime(slot.timeEnd)}}</div>
+        </router-link>
       </div>
     </div>
   </div>

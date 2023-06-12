@@ -246,6 +246,11 @@
     cursor: pointer;
 }
 
+.time-quantum-slot a {
+    width: 100%;
+    text-align: center;
+}
+
 .time-quantum-slot-time {
     font-weight: bold;
 }
