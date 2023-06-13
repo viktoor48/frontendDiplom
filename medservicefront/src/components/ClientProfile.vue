@@ -69,7 +69,7 @@
             <div v-for="slot in getClient.getTimeSlots" :key="slot.id" class="personal-area__record-item doctor-card__min">
               <div class="doctor-card__left-side">
                 <div class="doctor-card__img-wrapper">
-                  <img :src="require('../images/' + slot.getDoctor.photo)" alt="">
+                  <img :src="require('../images/users/' + slot.getDoctor.photo)" alt="">
                 </div>
               </div>
               <div class="doctor-card__right-side">

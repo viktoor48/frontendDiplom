@@ -9,7 +9,7 @@
           <form action="#" @submit.prevent="onSubmit" class="appointment-doctor__main">
             <div class="appointment-doctor__header">
               <div class="appointment-doctor__img-wrapper">
-                <img :src="require('../images/' + getSlot.getDoctor.photo)" alt="">
+                <img :src="require('../images/users/' + getSlot.getDoctor.photo)" alt="">
               </div>
               <div class="appointment-doctor__info-doctor">
                 <a href="#" class="appointment-doctor__name text_subtitle-1">{{`${getSlot.getDoctor.surname} ${getSlot.getDoctor.name} ${getSlot.getDoctor.lastname}`}}</a>

@@ -148,6 +148,45 @@
                   <div class="messages__message error--text"></div>
                 </div>
               </div>
+              <div class="form__field-wrapper">
+                <div class="input-wrapper">
+                  <input type="text" placeholder="email" required class="input">
+                </div>
+                <div class="messages-wrapper">
+                  <div class="messages__message error--text"></div>
+                </div>
+              </div>
+              <div class="form__field-wrapper">
+                <div class="input-wrapper">
+                  <input type="text" placeholder="Пароль" required class="input">
+                </div>
+                <div class="messages-wrapper">
+                  <div class="messages__message error--text"></div>
+                </div>
+              </div>
+              <div class="form__field-wrapper form__field-wrapper-service">
+                <div class="input-wrapper__service">
+                  <div class="input-wrapper">
+                    <input type="text" placeholder="Название услуги" required class="input">
+                  </div>
+                  <div class="messages-wrapper">
+                    <div class="messages__message error--text"></div>
+                  </div>
+                </div>
+                <div class="input-wrapper__service">
+                  <div class="input-wrapper">
+                    <input type="text" placeholder="Цена услуги" required class="input">
+                  </div>
+                  <div class="messages-wrapper">
+                    <div class="messages__message error--text"></div>
+                  </div>
+                </div>
+                <div class="input-wrapper__service-btn">
+                  <button class="add-service__btn">
+                    <img src="../images/plus.svg" alt="">
+                  </button>
+                </div>
+              </div>
               <div class="form__wrapper-btn">
                 <button class="form__btn button">Добавить врача</button>
               </div>

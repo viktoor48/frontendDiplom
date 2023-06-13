@@ -4,3 +4,28 @@
     outline: none;
     background: none;
 }
+
+.form__field-wrapper-service {
+    display: flex;
+}
+
+.input-wrapper__service {
+    flex-basis: 45%;
+}
+
+.input-wrapper__service:first-child {
+    margin-right: 20px;
+}
+
+.input-wrapper__service-btn {
+    margin-left: auto;
+}
+
+.add-service__btn {
+    width: 40px;
+    background-color: white;
+}
+
+.add-service__btn:hover {
+    opacity: 0.5;
+}
