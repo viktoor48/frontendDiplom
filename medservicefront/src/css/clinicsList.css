@@ -3,6 +3,12 @@
     width: 30px;
 }
 
+.card-clinic__favorite-wrapper {
+    height: 30px;
+    width: 30px;
+    right: -11px;
+}
+
 .card-clinic__container {
     margin: 40px 0;
 }
@@ -34,5 +40,14 @@
 
 .card-clinic__description-block {
     margin-left: auto;
-    flex-basis: 240px;
+    flex-basis: 382px
+}
+
+.card-clinic__description-text {
+    font-size: 15px;
+}
+
+.card-clinic__description-title {
+    font-size: 20px;
+    margin-bottom: 6px;
 }

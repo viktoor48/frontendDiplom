@@ -81,7 +81,7 @@ const routes = [
   },
   {
     path: '/listClinics',
-    name: 'listClinicsPage',
+    name: 'listClinics',
     component: ListClinicsPage,
   },
   {
