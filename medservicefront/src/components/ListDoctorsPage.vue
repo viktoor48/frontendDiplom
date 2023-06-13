@@ -13,7 +13,7 @@
                   <div class="card-doctor__favorite-wrapper">
                     <div class="card-doctor__favorite-icon"></div>
                   </div>
-                  <img :src="require('../images/' + doctor.photo)" alt="">
+                  <img :src="require('../images/users/' + doctor.photo)" alt="">
                 </div>
                 <div class="card-doctor__stars-container">
                   <div class="rating-result">

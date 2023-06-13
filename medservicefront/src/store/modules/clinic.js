@@ -22,7 +22,6 @@ export default {
         async fetchClinicId(ctx, id) {
           const response = await fetch(`http://localhost:8000/api/clinics/${id}`);
           const result = await response.json();
-          // const clinic = [...result['hydra:member']];
 
           ctx.commit('updateCurrentClinic', result);
         },
