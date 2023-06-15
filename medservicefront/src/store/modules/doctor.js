@@ -81,6 +81,35 @@ export default {
 
             ctx.commit('updateReviewsDoctors', reviews);
         },
+        async uploadServices(ctx, services) {
+            // const services = [
+            //     {
+            //         "name": "testService1",
+            //         "price": "500",
+            //         "doctor": "/api/doctors/3"
+            //     },
+            //     {
+            //         "name": "testService2",
+            //         "price": "750",
+            //         "doctor": "/api/doctors/3"
+            //     }
+            // ];
+
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            };
+
+            services.forEach(service => {
+                requestOptions.body = JSON.stringify(service);
+
+                // Отправляем запрос на сервер и обрабатываем ответ
+                fetch('http://localhost:8000/api/services', requestOptions)
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.error(error));
+            });
+        },
     },
     state: {
         doctors: [],

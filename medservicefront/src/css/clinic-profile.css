@@ -29,3 +29,15 @@
 .add-service__btn:hover {
     opacity: 0.5;
 }
+
+.remove-service__btn {
+    width: 28px;
+    background-color: white;
+    position: relative;
+    right: 5px;
+    top: 5px;
+}
+
+.remove-service__btn:hover {
+    opacity: 0.5;
+}

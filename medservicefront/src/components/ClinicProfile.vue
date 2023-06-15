@@ -90,42 +90,42 @@
         <div class="personal-area__item-container">
           <div class="personal-area__record-title big-title">Добавить врача</div>
           <div class="personal-area__form-container">
-            <form action="#" class="personal-area__form-add form__item" novalidate>
+            <form @click.prevent="addDoctor" class="personal-area__form-add form__item" novalidate>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
-                  <input type="text" placeholder="Имя" required class="input">
+                  <input type="text" v-model="form.name" placeholder="Имя" required class="input">
                 </div>
                 <div class="messages-wrapper">
-                  <div class="messages__message error--text"></div>
+                  <div class="messages__message error--text">{{ errors.name }}</div>
                 </div>
               </div>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
-                  <input type="text" placeholder="Фамилия" required class="input">
+                  <input type="text" v-model="form.surname" placeholder="Фамилия" required class="input">
                 </div>
                 <div class="messages-wrapper">
-                  <div class="messages__message error--text"></div>
+                  <div class="messages__message error--text">{{ errors.surname }}</div>
                 </div>
               </div>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
-                  <input type="text" placeholder="Отчество" class="input">
+                  <input type="text" v-model="form.lastname" placeholder="Отчество" class="input">
                 </div>
                 <div class="messages-wrapper">
-                  <div class="messages__message error--text"></div>
+                  <div class="messages__message error--text">{{ errors.lastname }}</div>
                 </div>
               </div>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
-                  <input type="text" placeholder="Телефон" required class="input">
+                  <input type="text" v-model="form.number" placeholder="Телефон" required class="input">
                 </div>
                 <div class="messages-wrapper">
-                  <div class="messages__message error--text"></div>
+                  <div class="messages__message error--text">{{ errors.number }}</div>
                 </div>
               </div>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
-                  <input type="email" placeholder="Специализация" required class="input" list="specialization" multiple>
+                  <input type="email" v-model="form.specialization" placeholder="Специализация" required class="input" list="specialization" multiple>
                   <datalist id="specialization">
                     <option value="Аллерголог">Аллерголог</option>
                     <option value="Анестезиолог-реаниматолог">Анестезиолог-реаниматолог</option>
@@ -137,37 +137,37 @@
                   </datalist>
                 </div>
                 <div class="messages-wrapper">
-                  <div class="messages__message error--text"></div>
+                  <div class="messages__message error--text">{{ errors.specialization }}</div>
                 </div>
               </div>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
-                  <input type="text" placeholder="Описание" required class="input">
+                  <input type="text" v-model="form.description" placeholder="Описание" required class="input">
                 </div>
                 <div class="messages-wrapper">
-                  <div class="messages__message error--text"></div>
+                  <div class="messages__message error--text">{{ errors.description }}</div>
                 </div>
               </div>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
-                  <input type="text" placeholder="email" required class="input">
+                  <input type="text" v-model="form.email" placeholder="email" required class="input">
                 </div>
                 <div class="messages-wrapper">
-                  <div class="messages__message error--text"></div>
+                  <div class="messages__message error--text">{{ errors.email }}</div>
                 </div>
               </div>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
-                  <input type="text" placeholder="Пароль" required class="input">
+                  <input type="text" v-model="form.password" placeholder="Пароль" required class="input">
                 </div>
                 <div class="messages-wrapper">
-                  <div class="messages__message error--text"></div>
+                  <div class="messages__message error--text">{{ errors.password }}</div>
                 </div>
               </div>
-              <div class="form__field-wrapper form__field-wrapper-service">
+              <div v-for="(service, index) in services" :key="index" class="form__field-wrapper form__field-wrapper-service">
                 <div class="input-wrapper__service">
                   <div class="input-wrapper">
-                    <input type="text" placeholder="Название услуги" required class="input">
+                    <input type="text" placeholder="Название услуги" v-model="service.name" required class="input">
                   </div>
                   <div class="messages-wrapper">
                     <div class="messages__message error--text"></div>
@@ -175,15 +175,18 @@
                 </div>
                 <div class="input-wrapper__service">
                   <div class="input-wrapper">
-                    <input type="text" placeholder="Цена услуги" required class="input">
+                    <input type="text" placeholder="Цена услуги" v-model="service.price" required class="input">
                   </div>
                   <div class="messages-wrapper">
                     <div class="messages__message error--text"></div>
                   </div>
                 </div>
                 <div class="input-wrapper__service-btn">
-                  <button class="add-service__btn">
+                  <button v-if="index === 0" type="button" class="add-service__btn" @click="addService">
                     <img src="../images/plus.svg" alt="">
+                  </button>
+                  <button v-else type="button" class="add-service__btn remove-service__btn" @click="removeService(index)">
+                    <img src="../images/minus.svg" alt="">
                   </button>
                 </div>
               </div>
@@ -224,10 +227,62 @@
 import HeaderMin from "@/components/HeaderMin";
 import FooterComponent from "@/components/FooterComponent";
 import router from "@/router";
+import * as Yup from "yup";
+
 export default {
   name: "ClinicProfile",
   components: {HeaderMin, FooterComponent},
   methods: {
+    async addDoctor() {
+      const schema = Yup.object().shape({
+        name: Yup.string()
+            .max(20, "Максимальная длина имени - 20 символов")
+            .required("Поле Имя обязательно для заполнения"),
+        surname: Yup.string()
+            .max(30, "Максимальная длина фамилии - 30 символов")
+            .required("Поле Фамилия обязательно для заполнения"),
+        lastname: Yup.string().max(
+            30,
+            "Максимальная длина отчества - 30 символов"
+        ),
+        email: Yup.string()
+            .email("Введите корректный адрес электронной почты")
+            .required("Поле Почта обязательно для заполнения"),
+        specialization: Yup.string()
+            .required("Поле Специализация обязательно для заполнения"),
+        city: Yup.string()
+            .required("Поле Город обязательно для заполнения"),
+        password: Yup.string()
+            .matches(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/, 'Пароль должен содержать латинские символы и цифры')
+            .required('Это поле обязательно для заполнения')
+            .min(8, 'Пароль должен содержать не менее 8 символов')
+            .test('not-all-digits', 'Пароль не может состоять только из цифр', function(value) {
+              return !/^\d+$/.test(value);
+            }),
+        confirmPassword: Yup.string().oneOf(
+            [Yup.ref("password"), null],
+            "Пароли должны совпадать"
+        ),
+      });
+
+      try {
+        await schema.validate(this.form, { abortEarly: false });
+        this.errors = {};
+
+        // const response = await this.$store.dispatch('onRegister', {form: this.form, role: UserRoles.Doctor});
+        // if (response.status >= 400) {
+        //   alert('Пользователь с таким email уже существует');
+        // } else {
+        //   router.push({name: 'home'});
+        // }
+      } catch (error) {
+        const errors = error.inner ? error.inner.reduce((acc, curr) => {
+          acc[curr.path] = curr.message;
+          return acc;
+        }, {}) : {};
+        this.errors = errors;
+      }
+    },
     onLogout() {
       this.$store.dispatch('onLogout');
       router.push({name: 'home'});
@@ -254,11 +309,30 @@ export default {
 
       return clinic;
     },
+    addService() {
+      this.services.push({ name: '', price: '' });
+    },
+    removeService(index) {
+      this.services.splice(index, 1);
+    }
   },
   data() {
     return {
       isLoading: true,
       clinicId: '',
+      services: [{ name: '', price: '' }],
+      form: {
+        name: "",
+        surname: "",
+        lastname: "",
+        city: "",
+        specialization: "",
+        description: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
+      errors: {},
     }
   },
   computed: {

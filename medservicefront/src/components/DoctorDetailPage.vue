@@ -6,7 +6,7 @@
         <div class="doctor-intro">
           <div class="doctor-intro__left-side">
             <div class="doctor-intro__img-wrapper">
-              <img class="doctor-intro__img" :src="require('../images/' + doctor.photo)" alt="">
+              <img class="doctor-intro__img" :src="require('../images/users/' + doctor.photo)" alt="">
             </div>
             <div class="card-doctor__stars-container">
               <div class="rating-result">
@@ -88,10 +88,10 @@
                   </div>
                   <div class="time-quantums-slots">
                     <div class="time-quantum-slot">
-                      <div class="time-quantum-slot-time">8:00-10:00</div>
+                      <div class="time-quantum-slot-time">8:00-8:30</div>
                     </div>
                     <div class="time-quantum-slot">
-                      <div class="time-quantum-slot-time">10:00-12:00</div>
+                      <div class="time-quantum-slot-time">10:00-10:30</div>
                     </div>
                   </div>
                 </div>

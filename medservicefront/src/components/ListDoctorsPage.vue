@@ -24,7 +24,7 @@
                     <span></span>
                   </div>
                 </div>
-                <a href="#" class="card-doctor__link-review">
+                <a href="#reviewPage" class="card-doctor__link-review">
                   {{doctor.reviewDoctors.length}}&nbsp;отзывов
                 </a>
               </div>

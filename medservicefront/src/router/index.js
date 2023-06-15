@@ -15,6 +15,7 @@ import ClientProfile from "@/components/ClientProfile";
 import DoctorProfile from "@/components/DoctorProfile";
 import ClinicProfile from "@/components/ClinicProfile";
 import AppointmentDoctor from "@/components/AppointmentDoctor";
+import ReviewPage from "@/components/ReviewPage";
 
 
 /**
@@ -134,6 +135,11 @@ const routes = [
     component: AppointmentDoctor,
     beforeEnter: clientAuthGuard,
   },
+  {
+    path: '/reviewPage',
+    name: 'reviewPage',
+    component: ReviewPage,
+  }
 ]
 
 const router = createRouter({

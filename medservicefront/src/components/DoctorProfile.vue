@@ -64,50 +64,50 @@
         </div>
         <div class="personal-area__item-container">
           <div class="personal-area__record-title big-title">Записи на прием</div>
-          <div class="personal-area__record-list">
-            <div class="personal-area__record-item doctor-card__min">
-              <div class="doctor-card__left-side">
-                <div class="doctor-card__img-wrapper">
-                  <img src="../images/avatarDoctor.png" alt="">
-                </div>
-              </div>
-              <div class="doctor-card__right-side">
-                <div class="doctor-card__date secondary-text">
-                  13 мая (сб), 10:40
-                </div>
-                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>
-                <div class="doctor-card__service secondary-text">Акушер</div>
-              </div>
-            </div>
-            <div class="personal-area__record-item doctor-card__min">
-              <div class="doctor-card__left-side">
-                <div class="doctor-card__img-wrapper">
-                  <img src="../images/avatarDoctor.png" alt="">
-                </div>
-              </div>
-              <div class="doctor-card__right-side">
-                <div class="doctor-card__date secondary-text">
-                  13 мая (сб), 10:40
-                </div>
-                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>
-                <div class="doctor-card__service secondary-text">Акушер</div>
-              </div>
-            </div>
-            <div class="personal-area__record-item doctor-card__min">
-              <div class="doctor-card__left-side">
-                <div class="doctor-card__img-wrapper">
-                  <img src="../images/avatarDoctor.png" alt="">
-                </div>
-              </div>
-              <div class="doctor-card__right-side">
-                <div class="doctor-card__date secondary-text">
-                  13 мая (сб), 10:40
-                </div>
-                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>
-                <div class="doctor-card__service secondary-text">Акушер</div>
-              </div>
-            </div>
-          </div>
+<!--          <div class="personal-area__record-list">-->
+<!--            <div class="personal-area__record-item doctor-card__min">-->
+<!--              <div class="doctor-card__left-side">-->
+<!--                <div class="doctor-card__img-wrapper">-->
+<!--                  <img src="../images/avatarDoctor.png" alt="">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="doctor-card__right-side">-->
+<!--                <div class="doctor-card__date secondary-text">-->
+<!--                  13 мая (сб), 10:40-->
+<!--                </div>-->
+<!--                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>-->
+<!--                <div class="doctor-card__service secondary-text">Акушер</div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="personal-area__record-item doctor-card__min">-->
+<!--              <div class="doctor-card__left-side">-->
+<!--                <div class="doctor-card__img-wrapper">-->
+<!--                  <img src="../images/avatarDoctor.png" alt="">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="doctor-card__right-side">-->
+<!--                <div class="doctor-card__date secondary-text">-->
+<!--                  13 мая (сб), 10:40-->
+<!--                </div>-->
+<!--                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>-->
+<!--                <div class="doctor-card__service secondary-text">Акушер</div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="personal-area__record-item doctor-card__min">-->
+<!--              <div class="doctor-card__left-side">-->
+<!--                <div class="doctor-card__img-wrapper">-->
+<!--                  <img src="../images/avatarDoctor.png" alt="">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="doctor-card__right-side">-->
+<!--                <div class="doctor-card__date secondary-text">-->
+<!--                  13 мая (сб), 10:40-->
+<!--                </div>-->
+<!--                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>-->
+<!--                <div class="doctor-card__service secondary-text">Акушер</div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
         <div class="personal-area__item-container">
           <div class="personal-area__record-title big-title">Ваши отзывы</div>

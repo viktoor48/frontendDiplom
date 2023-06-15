@@ -99,20 +99,6 @@
                 <div class="card-doctor__favorite-icon"></div>
               </div>
             </div>
-            <div class="personal-area__record-item doctor-card__min">
-              <div class="doctor-card__left-side">
-                <div class="doctor-card__img-wrapper">
-                  <img src="../images/avatarDoctor.png" alt="">
-                </div>
-              </div>
-              <div class="doctor-card__right-side">
-                <div class="doctor-card__name text_subtitle-1">Молчанова Валентина Ивановна</div>
-                <div class="doctor-card__specialization secondary-text">Акушер, гинеколог</div>
-              </div>
-              <div class="card-doctor__favorite-wrapper active">
-                <div class="card-doctor__favorite-icon"></div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="personal-area__item-container">

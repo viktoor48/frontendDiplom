@@ -83,7 +83,7 @@ export default {
         const token = this.$store.getters.getToken;
         const userRole = this.$store.getters.getUserRole;
         if (token == null) {
-          alert('такого нету');
+          alert('Такого пользователя не существует');
         } else {
           console.log(token);
           console.log(userRole);
