@@ -8,28 +8,28 @@
           <div class="intro-stat__img background-review"></div>
           <div class="intro-stat__text">
             <div class="intro-stat__title">{{countReviews}}</div>
-            <div class="intro-stat__subtitle">отзывов</div>
+            <div class="intro-stat__subtitle">{{this.pluralize(countReviews, ['отзыв', 'отзыва', 'отзывов'])}}</div>
           </div>
         </div>
         <div class="intro-stat__item">
           <div class="intro-stat__img background-record"></div>
           <div class="intro-stat__text">
             <div class="intro-stat__title">{{countAppointment}}</div>
-            <div class="intro-stat__subtitle">записей на прием</div>
+            <div class="intro-stat__subtitle">{{this.pluralize(countAppointment, ['запись', 'записи', 'записей'])}} на прием</div>
           </div>
         </div>
         <div class="intro-stat__item">
           <div class="intro-stat__img background-doctors"></div>
           <div class="intro-stat__text">
             <div class="intro-stat__title">{{countDoctors}}</div>
-            <div class="intro-stat__subtitle">врачей</div>
+            <div class="intro-stat__subtitle">{{this.pluralize(countDoctors, ['врач', 'врача', 'врачей'])}}</div>
           </div>
         </div>
         <div class="intro-stat__item">
           <div class="intro-stat__img background-clinic"></div>
           <div class="intro-stat__text">
             <div class="intro-stat__title">{{countClinics}}</div>
-            <div class="intro-stat__subtitle">клиник</div>
+            <div class="intro-stat__subtitle">{{this.pluralize(countClinics, ['клиника', 'клиники', 'клиник'])}}</div>
           </div>
         </div>
       </div>
@@ -94,6 +94,11 @@ export default {
   },
 
   methods: {
+    pluralize(count, forms) {
+      const cases = [2, 0, 1, 1, 1, 2];
+      const index = (count % 100 > 4 && count % 100 < 20) ? 2 : cases[Math.min(count % 10, 5)];
+      return `${forms[index]}`;
+    },
     specializationCount(array) {
       const specialtiesCount = {};
 

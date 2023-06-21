@@ -24,8 +24,8 @@
                     <span></span>
                   </div>
                 </div>
-                <a href="#reviewPage" class="card-doctor__link-review">
-                  {{doctor.reviewDoctors.length}}&nbsp;отзывов
+                <a href="#" class="card-doctor__link-review">
+                  {{this.pluralize(doctor.reviewDoctors.length, ['отзыв', 'отзыва', 'отзывов'])}}
                 </a>
               </div>
             </div>
@@ -41,7 +41,7 @@
                       <img src="../images/icon-clinic.svg" class="appointment__icon" alt="">
                     </div>
                     <div class="card-doctor__appointment-text">В клинике</div>
-                    <div class="card-doctor__appointment-price">от&nbsp;{{findMinPrice(doctor.getServices)}}&nbsp;₽</div>
+                    <div class="card-doctor__appointment-price" v-if="doctor.getServices.length > 0">от&nbsp;{{findMinPrice(doctor.getServices)}}&nbsp;₽</div>
                   </div>
                 </div>
                 <div class="card-doctor__phone-container">
@@ -81,6 +81,11 @@ export default {
     };
   },
   methods: {
+    pluralize(count, forms) {
+      const cases = [2, 0, 1, 1, 1, 2];
+      const index = (count % 100 > 4 && count % 100 < 20) ? 2 : cases[Math.min(count % 10, 5)];
+      return `${count} ${forms[index]}`;
+    },
     getIdFromUrl(array) {
       return array.map(url => {
         const parts = url.split('/');
@@ -156,23 +161,3 @@ export default {
 <style src="../css/reset.css"></style>
 <style src="../css/style.css"></style>
 <style src="../css/doctors.css"></style>
-
-<style>
-.loading-spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top-color: #3498db;
-  animation: spinner 0.8s ease-in-out infinite;
-}
-
-@keyframes spinner {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-</style>

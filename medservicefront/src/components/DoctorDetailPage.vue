@@ -1,7 +1,8 @@
 <template>
   <HeaderBig></HeaderBig>
   <main class="main-wrapper">
-    <div class="container" v-if="doctor">
+    <div v-if="isLoading" class="loading-spinner"></div>
+    <div v-else class="container">
       <div class="doctor-intro__wrapper">
         <div class="doctor-intro">
           <div class="doctor-intro__left-side">
@@ -18,20 +19,22 @@
               </div>
             </div>
             <a href="#" class="doctor-intro__link-review">
-              27&nbsp;отзывов
+              {{this.pluralize(doctor.reviewDoctors.length, ['отзыв', 'отзыва', 'отзывов'])}}
             </a>
           </div>
           <div class="doctor-intro__right-side">
             <div class="doctor-intro__name">
               <a href="#" class="doctor-intro__name-link">{{`${doctor.surname} ${doctor.name} ${doctor.lastname}`}}</a>
             </div>
-            <div class="doctor-intro__city">Липецк</div>
+            <div class="doctor-intro__city">{{doctor.city}}</div>
             <div class="doctor-intro__spec">
               <a v-for="(spec, index) in doctor.specialization.split(', ')" :key="index" href="#" class="doctor-intro__spec-link">{{ spec }}</a>
             </div>
-            <p class="doctor-intro__description">{{`${doctor.surname} ${doctor.name} ${doctor.lastname}, ${doctor.specialization}, запись на прием ☎ (8452) 31-81-36).`}}</p>
+            <p class="doctor-intro__description">{{`${doctor.surname} ${doctor.name} ${doctor.lastname}, ${doctor.specialization}, запись на прием ☎ ${doctor.getClinics[0].number}.`}}</p>
             <button class="doctor-intro__send-review b-button-blue">
-              <span>Оставить отзыв</span>
+              <router-link to="reviewPage">
+                <span>Оставить отзыв</span>
+              </router-link>
             </button>
           </div>
         </div>
@@ -48,53 +51,28 @@
             <div class="doctor-contacts__info-row">
               <div class="doctor-contacts__info-left">
                 <div class="doctor-contacts__clinic-name">
-                  <a class="doctor-contacts__clinic-link">«Лечебно-диагностический центр №1» на Коммунальной</a>
+                  <a class="doctor-contacts__clinic-link">{{doctor.getClinics[0].name}}</a>
                 </div>
-                <div class="doctor-contacts__address">пл. Коммунальная, д. 9</div>
+                <div class="doctor-contacts__address">{{doctor.getClinics[0].address}}</div>
                 <div class="card-doctor__appointment-wrapper">
                   <div class="card-doctor__appointment-item">
                     <div class="card-doctor__appointment-icon">
                       <img src="../images/icon-clinic.svg" class="appointment__icon" alt="">
                     </div>
                     <div class="card-doctor__appointment-text">В клинике</div>
-                    <div class="card-doctor__appointment-price">от&nbsp;800&nbsp;₽</div>
+                    <div class="card-doctor__appointment-price" v-if="doctor.getServices.length > 0">от&nbsp;{{findMinPrice(doctor.getServices)}}&nbsp;₽</div>
                   </div>
                 </div>
                 <div class="doctor-contacts__prices">
-                  <div class="doctor-contacts__prices-item">Акушер (от 14 лет) — от 1500₽</div>
-                  <div class="doctor-contacts__prices-item">Врач УЗИ (от 14 лет) — от 800₽</div>
-                  <div class="doctor-contacts__prices-item">Гинеколог (от 14 лет) — от 1500₽</div>
+                  <div v-for="service in doctor.getServices" :key="service.id" class="doctor-contacts__prices-item">{{`${service.name} — от ${service.price}₽`}}</div>
                 </div>
                 <div class="card-doctor__phone">
                   <div class="card-doctor__phone-icon"></div>
-                  <div class="card-doctor__phone-num">(4742) 52-26-07</div>
+                  <div class="card-doctor__phone-num">{{doctor.getClinics[0].number}}</div>
                 </div>
               </div>
               <div class="doctor-contacts__info-right">
-                <div class="time-quantums-container">
-                  <div class="time-quantums-navigation">
-                    <button class="time-quantum-nav-button time-quantum-nav-back">&#8249;</button>
-                    <div class="time-quantum-nav-week">1-7 декабря</div>
-                    <button class="time-quantum-nav-button time-quantum-nav-forward">&#8250;</button>
-                  </div>
-                  <div class="time-quantums-days">
-                    <div class="time-quantum-day active">Пн</div>
-                    <div class="time-quantum-day">Вт</div>
-                    <div class="time-quantum-day">Ср</div>
-                    <div class="time-quantum-day">Чт</div>
-                    <div class="time-quantum-day">Пт</div>
-                    <div class="time-quantum-day">Сб</div>
-                    <div class="time-quantum-day">Вс</div>
-                  </div>
-                  <div class="time-quantums-slots">
-                    <div class="time-quantum-slot">
-                      <div class="time-quantum-slot-time">8:00-8:30</div>
-                    </div>
-                    <div class="time-quantum-slot">
-                      <div class="time-quantum-slot-time">10:00-10:30</div>
-                    </div>
-                  </div>
-                </div>
+                <TimeQuantumComponent :doctor="doctor"></TimeQuantumComponent>
               </div>
             </div>
           </div>
@@ -104,7 +82,7 @@
         <div class="rating-wrapper">
           <div class="rating__title">Рейтинг</div>
           <div class="rating__number-row">
-            <div class="rating__number">5.0</div>
+            <div class="rating__number">4.0</div>
             <div class="card-doctor__stars-container">
               <div class="rating-result">
                 <span class="active"></span>
@@ -119,7 +97,7 @@
         <div class="rating__stat-wrapper accordion">
           <div class="rating__stat-title">Отзывы</div>
           <div class="rating__number-row">
-            <div class="rating__stat-number">5.0</div>
+            <div class="rating__stat-number">4.0</div>
             <div class="card-doctor__stars-container">
               <div class="rating-result">
                 <span class="active"></span>
@@ -347,22 +325,81 @@
 <script>
 import HeaderBig from "@/components/HeaderBig";
 import FooterComponent from "@/components/FooterComponent";
+import TimeQuantumComponent from "@/components/TimeQuantumComponent";
 export default {
   name: "DoctorDetailPage",
   components: {
-    HeaderBig, FooterComponent,
+    HeaderBig, FooterComponent, TimeQuantumComponent,
   },
   data() {
     return {
-
+      isLoading: true,
     }
+  },
+  methods: {
+    pluralize(count, forms) {
+      const cases = [2, 0, 1, 1, 1, 2];
+      const index = (count % 100 > 4 && count % 100 < 20) ? 2 : cases[Math.min(count % 10, 5)];
+      return `${count} ${forms[index]}`;
+    },
+    findMinPrice(services) {
+      let minPrice = Number.MAX_VALUE;
+
+      for (let i = 0; i < services.length; i++) {
+        const price = parseInt(services[i].price);
+
+        if (price < minPrice) {
+          minPrice = price;
+        }
+      }
+
+      return minPrice;
+    },
+    getIdFromUrl(array) {
+      return array.map(url => {
+        const parts = url.split('/');
+        return parseInt(parts[parts.length-1]);
+      })
+    },
+    modifiedDoctorsObject(doctors, allClinics, allServices, allTimeSlots) {
+      let updatedDoctors = doctors;
+
+      this.addPropertyToDoctors(updatedDoctors, 'services', allServices);
+      this.addPropertyToDoctors(updatedDoctors, 'timeSlots', allTimeSlots);
+      this.addPropertyToDoctors(updatedDoctors, 'clinics', allClinics);
+
+      return updatedDoctors;
+    },
+    addPropertyToDoctors(doctors, propertyName, allElements) {
+      doctors.forEach(doctor => {
+        let elementIds = doctor[propertyName];
+        elementIds = this.getIdFromUrl(elementIds);
+
+        let elements = [];
+
+        elementIds.forEach(elementId => {
+          let element = allElements.find(e => e.id === elementId);
+          elements.push(element);
+        });
+
+        doctor['get' + propertyName.charAt(0).toUpperCase() + propertyName.slice(1)] = elements;
+      });
+
+      return doctors;
+    },
   },
   computed: {
     doctor() {
-      const doctors = this.$store.getters.allDoctors;
+      let doctors = this.$store.getters.allDoctors;
+      let clinics = this.$store.getters.allClinics;
+      let services = this.$store.getters.allServices;
+      let slots = this.$store.getters.allTimeSlots;
+      let updatedDoctors = this.modifiedDoctorsObject(doctors, clinics, services, slots);
+
       const id = this.$route.query.id;
+      const doctor = updatedDoctors.find(doctor => doctor.id == id);
       console.log(doctors.find(doctor => doctor.id == id));
-      return doctors.find(doctor => doctor.id == id);
+      return doctor;
     },
     currentClinic() {
       const currentClinic = this.$store.getters.currentClinic;
@@ -373,6 +410,10 @@ export default {
   async mounted() {
     try {
       await this.$store.dispatch('fetchDoctors');
+      await this.$store.dispatch('fetchClinics');
+      await this.$store.dispatch('fetchServices');
+      await this.$store.dispatch('fetchTimeSlots');
+      this.isLoading = false;
     } catch (error) {
       console.log(error);
     }

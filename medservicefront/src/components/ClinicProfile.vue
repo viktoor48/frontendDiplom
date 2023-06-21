@@ -20,7 +20,7 @@
                 <img src="../images/icon-phone.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="number" :placeholder="`${getClinic.number}`" class="personal-area__data-text">
+                <input disabled type="text" placeholder="Номер телефона" :value="`${getClinic.number}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -28,7 +28,7 @@
                 <img src="../images/icon-edit.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" :placeholder="`${getClinic.name}`" class="personal-area__data-text">
+                <input disabled type="text" placeholder="Название клиники" :value="`${getClinic.name}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -36,7 +36,7 @@
                 <img src="../images/icon-edit.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" :placeholder="`${getClinic.specialization}`" class="personal-area__data-text">
+                <input type="text" disabled  placeholder="Специализация" :value="`${getClinic.specialization}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -44,7 +44,7 @@
                 <img src="../images/icon-edit.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" :placeholder="`${getClinic.address}`" class="personal-area__data-text">
+                <input type="text" disabled placeholder="Адрес" :value="`${getClinic.address}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -52,7 +52,7 @@
                 <img src="../images/icon-edit.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" :placeholder="`${getClinic.city}`" class="personal-area__data-text">
+                <input type="text" disabled placeholder="Город" :value="`${getClinic.city}`" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -60,15 +60,15 @@
                 <img src="../images/icon-edit.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <textarea class="personal-area__data-textarea" :placeholder="`${getClinic.description}`"></textarea>
+                <textarea class="personal-area__data-textarea" disabled placeholder="Описание" :value="`${getClinic.description}`"></textarea>
               </div>
             </div>
           </div>
           <div class="personal-area__action-wrapper">
-            <button class="personal-area__btn-edit button">Изменить</button>
-            <button disabled class="personal-area__btn-save button">
+            <button v-if="editing" @click="saveData" class="personal-area__btn-save button">
               Сохранить
             </button>
+            <button v-else @click="editData" class="personal-area__btn-edit button">Изменить</button>
           </div>
         </div>
         <div class="personal-area__item-container">
@@ -90,7 +90,7 @@
         <div class="personal-area__item-container">
           <div class="personal-area__record-title big-title">Добавить врача</div>
           <div class="personal-area__form-container">
-            <form @click.prevent="addDoctor" class="personal-area__form-add form__item" novalidate>
+            <form @submit.prevent="addDoctor" class="personal-area__form-add form__item" novalidate>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
                   <input type="text" v-model="form.name" placeholder="Имя" required class="input">
@@ -150,6 +150,14 @@
               </div>
               <div class="form__field-wrapper">
                 <div class="input-wrapper">
+                  <input type="text" v-model="form.city" placeholder="Город" required class="input">
+                </div>
+                <div class="messages-wrapper">
+                  <div class="messages__message error--text">{{ errors.city }}</div>
+                </div>
+              </div>
+              <div class="form__field-wrapper">
+                <div class="input-wrapper">
                   <input type="text" v-model="form.email" placeholder="email" required class="input">
                 </div>
                 <div class="messages-wrapper">
@@ -191,7 +199,7 @@
                 </div>
               </div>
               <div class="form__wrapper-btn">
-                <button class="form__btn button">Добавить врача</button>
+                <button type="submit" class="form__btn button">Добавить врача</button>
               </div>
             </form>
           </div>
@@ -228,11 +236,48 @@ import HeaderMin from "@/components/HeaderMin";
 import FooterComponent from "@/components/FooterComponent";
 import router from "@/router";
 import * as Yup from "yup";
+import {UserRoles} from "@/constants/constants";
 
 export default {
   name: "ClinicProfile",
   components: {HeaderMin, FooterComponent},
+  data() {
+    return {
+      isLoading: true,
+      editing: false,
+      clinicId: '',
+      services: [{ name: '', price: '', doctor: '' }],
+      form: {
+        name: "",
+        surname: "",
+        lastname: "",
+        city: "",
+        specialization: "",
+        description: "",
+        email: "",
+        password: "",
+        clinics: [],
+        photo: "defaultImage.png",
+      },
+      errors: {},
+    }
+  },
   methods: {
+    editData() {
+      this.editing = true;
+      const inputFields = document.querySelectorAll('.personal-area__data-text, .personal-area__data-textarea');
+      inputFields.forEach((inputField) => {
+        inputField.removeAttribute('disabled');
+      });
+    },
+    saveData() {
+      this.editing = false;
+      const inputFields = document.querySelectorAll('.personal-area__data-text, .personal-area__data-textarea');
+      inputFields.forEach((inputField) => {
+        inputField.setAttribute('disabled', true);
+      });
+      alert("Данные успешно сохранены!");
+    },
     async addDoctor() {
       const schema = Yup.object().shape({
         name: Yup.string()
@@ -259,28 +304,33 @@ export default {
             .test('not-all-digits', 'Пароль не может состоять только из цифр', function(value) {
               return !/^\d+$/.test(value);
             }),
-        confirmPassword: Yup.string().oneOf(
-            [Yup.ref("password"), null],
-            "Пароли должны совпадать"
-        ),
       });
 
       try {
         await schema.validate(this.form, { abortEarly: false });
         this.errors = {};
+        console.log(this.form);
+        console.log(this.services);
 
-        // const response = await this.$store.dispatch('onRegister', {form: this.form, role: UserRoles.Doctor});
-        // if (response.status >= 400) {
-        //   alert('Пользователь с таким email уже существует');
-        // } else {
-        //   router.push({name: 'home'});
-        // }
+        const response = await this.$store.dispatch('addDoctorByClinic', {form: this.form, role: UserRoles.Doctor});
+        if (response.status >= 400) {
+          alert('Врач с таким email уже существует');
+        } else {
+          const newDoctorId = response;
+          this.services.forEach(service => {
+             service.doctor = `/api/doctors/${newDoctorId}`;
+          });
+          await this.$store.dispatch('uploadServices', this.services);
+          console.log(this.services);
+          this.$router.go(0);
+        }
       } catch (error) {
         const errors = error.inner ? error.inner.reduce((acc, curr) => {
           acc[curr.path] = curr.message;
           return acc;
         }, {}) : {};
         this.errors = errors;
+        console.log(this.errors);
       }
     },
     onLogout() {
@@ -310,29 +360,10 @@ export default {
       return clinic;
     },
     addService() {
-      this.services.push({ name: '', price: '' });
+      this.services.push({ name: '', price: '', doctor: '' });
     },
     removeService(index) {
       this.services.splice(index, 1);
-    }
-  },
-  data() {
-    return {
-      isLoading: true,
-      clinicId: '',
-      services: [{ name: '', price: '' }],
-      form: {
-        name: "",
-        surname: "",
-        lastname: "",
-        city: "",
-        specialization: "",
-        description: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      },
-      errors: {},
     }
   },
   computed: {
@@ -348,6 +379,7 @@ export default {
   async mounted() {
     try {
       const id = await this.$store.getters.getToken;
+      this.form.clinics.push(`/api/clinics/${id}`);
       await this.$store.dispatch('fetchClinicId', id);
       await this.$store.dispatch('fetchDoctors');
       this.isLoading = false;

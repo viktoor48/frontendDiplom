@@ -31,7 +31,7 @@
             <div class="card-doctor__main-content">
               <div class="card-doctor__info">
                 <div class="card-doctor__name">
-                  <a href="#clinicDetail" class="card-doctor__name-link clinic__name-link">
+                  <a :href="`#clinicDetail?id=${clinic.id}`" class="card-doctor__name-link clinic__name-link">
                     {{ clinic.name }}
                   </a>
                 </div>

@@ -47,10 +47,28 @@ export default {
                     error.status = response.status;
                     throw error;
                 }
+
                 const id = response.id;
                 ctx.commit('setToken', id);
                 ctx.commit('setUserRole', role);
                 return true;
+            } catch (error) {
+                return error;
+            }
+        },
+        async addDoctorByClinic(ctx, {form, role}) {
+            try {
+                const response = await RegistrationApi.register(form, role);
+
+                if (response.status >= 400) {
+                    const errorMessage = response.statusText || 'Unknown error';
+                    const error = new Error(errorMessage);
+                    error.status = response.status;
+                    throw error;
+                }
+
+                const id = response.id;
+                return id;
             } catch (error) {
                 return error;
             }

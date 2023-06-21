@@ -9,33 +9,17 @@
               <img src="../images/icon-profile.svg" alt="">
             </div>
             <div class="personal-area__column">
-              <div class="personal-area__title">+7 919 256-93-30</div>
+              <div class="personal-area__title">Косенков Виктор Дмитриевич</div>
               <div class="personal-area__subtitle">Профиль</div>
             </div>
           </div>
           <div class="personal-area__personal-data">
             <div class="personal-area__data-row">
               <div class="personal-area__data-icon">
-                <img src="../images/icon-phone.svg" alt="">
+                <img src="../images/icon-mail.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="number" placeholder="+7 (919) 256-93-30" class="personal-area__data-text">
-              </div>
-            </div>
-            <div class="personal-area__data-row">
-              <div class="personal-area__data-icon">
-                <img src="../images/icon-edit.svg" alt="">
-              </div>
-              <div class="personal-area__data-content">
-                <input type="text" placeholder="Молчанова Валентина Михайловна" class="personal-area__data-text">
-              </div>
-            </div>
-            <div class="personal-area__data-row">
-              <div class="personal-area__data-icon">
-                <img src="../images/icon-calendar.svg" alt="">
-              </div>
-              <div class="personal-area__data-content">
-                <input type="text" placeholder="Дата рождения" class="personal-area__data-text">
+                <input type="text" placeholder="sadd@mail.ru" class="personal-area__data-text">
               </div>
             </div>
             <div class="personal-area__data-row">
@@ -43,15 +27,7 @@
                 <img src="../images/icon-mail.svg" alt="">
               </div>
               <div class="personal-area__data-content">
-                <input type="text" placeholder="kosenkov.viktor@list.ru" class="personal-area__data-text">
-              </div>
-            </div>
-            <div class="personal-area__data-row">
-              <div class="personal-area__data-icon">
-                <img src="../images/icon-mail.svg" alt="">
-              </div>
-              <div class="personal-area__data-content">
-                <input type="text" placeholder="Акушер, гинеколог" class="personal-area__data-text">
+                <input type="text" placeholder="Физиотерапевт" class="personal-area__data-text">
               </div>
             </div>
           </div>

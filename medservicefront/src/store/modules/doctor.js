@@ -82,19 +82,6 @@ export default {
             ctx.commit('updateReviewsDoctors', reviews);
         },
         async uploadServices(ctx, services) {
-            // const services = [
-            //     {
-            //         "name": "testService1",
-            //         "price": "500",
-            //         "doctor": "/api/doctors/3"
-            //     },
-            //     {
-            //         "name": "testService2",
-            //         "price": "750",
-            //         "doctor": "/api/doctors/3"
-            //     }
-            // ];
-
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }

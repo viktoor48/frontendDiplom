@@ -117,6 +117,7 @@ export default {
         description: "",
         email: "",
         password: "",
+        photo: "defaultimage.png",
         confirmPassword: "",
       },
       errors: {},
